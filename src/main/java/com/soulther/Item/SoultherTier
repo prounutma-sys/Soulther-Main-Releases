@@ -1,0 +1,23 @@
+package com.soulther.item;
+
+import com.soulther.init.ModItems;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.Tier;
+
+/** Soulther aletleri için özel Tier - netherite'dan güçlü. */
+public class SoultherTier {
+    public static final Tier SOULTHER_TIER = new Tier() {
+        @Override public int getUses() { return 2500; }
+        @Override public float getSpeed() { return 10.0F; }
+        @Override public float getAttackDamageBonus() { return 4.5F; }
+        @Override public net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> getTag() {
+            return BlockTags.INCORRECT_FOR_NETHERITE_TOOL;
+        }
+        @Override public int getEnchantmentValue() { return 18; }
+        @Override public Ingredient getRepairIngredient() {
+            return Ingredient.of(ModItems.SOULTHER_INGOT.get());
+        }
+    };
+}
