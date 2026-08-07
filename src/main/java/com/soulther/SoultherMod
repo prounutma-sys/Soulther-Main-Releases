@@ -1,0 +1,36 @@
+package com.soulther;
+
+import com.soulther.init.*;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+/**
+ * Soulther Mod - Ana giriş noktası.
+ *
+ * Bu mod şunları ekler:
+ *  - Yeni bir boyut: Soulther
+ *  - Warden'ın düşürdüğü "Warden Kalbi" eşyasıyla açılan özel bir portal
+ *  - Yeni cevherler, ingotlar, araçlar ve zırh seti
+ *  - Yeni moblar (Soul Wraith, Voidling)
+ *  - Yeni bir boss ejderha (Soulther Dragon)
+ *  - Yeni bloklar ve yeni bir sıvı (Liquid Soul)
+ */
+@Mod(SoultherMod.MOD_ID)
+public class SoultherMod {
+
+    public static final String MOD_ID = "soulther";
+
+    public SoultherMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModFluids.FLUIDS.register(modEventBus);
+        ModFluids.FLUID_TYPES.register(modEventBus);
+        ModEntities.ENTITY_TYPES.register(modEventBus);
+        ModCreativeTab.TABS.register(modEventBus);
+
+        modEventBus.addListener(ModEntities::registerAttributes);
+    }
+}
