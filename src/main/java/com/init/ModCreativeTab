@@ -1,0 +1,46 @@
+package com.soulther.init;
+
+import com.soulther.SoultherMod;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+public class ModCreativeTab {
+
+    public static final DeferredRegister<CreativeModeTab> TABS =
+            DeferredRegister.create(ForgeRegistries.CREATIVE_MODE_TABS, SoultherMod.MOD_ID);
+
+    public static final RegistryObject<CreativeModeTab> SOULTHER_TAB = TABS.register("soulther_tab",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.soulther"))
+                    .icon(() -> new ItemStack(ModItems.WARDEN_HEART.get()))
+                    .displayItems((params, output) -> {
+                        output.accept(ModItems.WARDEN_HEART.get());
+                        output.accept(ModItems.WARDEN_HEART_BLOCK.get());
+                        output.accept(ModItems.RAW_SOULTHER.get());
+                        output.accept(ModItems.SOULTHER_INGOT.get());
+                        output.accept(ModItems.SOULTHER_ORE.get());
+                        output.accept(ModItems.SOULTHER_BLOCK.get());
+                        output.accept(ModItems.SOULTHER_STONE.get());
+                        output.accept(ModItems.SOULTHER_GRASS.get());
+                        output.accept(ModItems.SOULTHER_LOG.get());
+                        output.accept(ModItems.SOULTHER_LEAVES.get());
+                        output.accept(ModItems.LIQUID_SOUL_BUCKET.get());
+                        output.accept(ModItems.SOULTHER_SWORD.get());
+                        output.accept(ModItems.SOULTHER_PICKAXE.get());
+                        output.accept(ModItems.SOULTHER_AXE.get());
+                        output.accept(ModItems.SOULTHER_SHOVEL.get());
+                        output.accept(ModItems.SOULTHER_HOE.get());
+                        output.accept(ModItems.SOULTHER_HELMET.get());
+                        output.accept(ModItems.SOULTHER_CHESTPLATE.get());
+                        output.accept(ModItems.SOULTHER_LEGGINGS.get());
+                        output.accept(ModItems.SOULTHER_BOOTS.get());
+                        output.accept(ModItems.SOUL_WRAITH_SPAWN_EGG.get());
+                        output.accept(ModItems.VOIDLING_SPAWN_EGG.get());
+                        output.accept(ModItems.SOULTHER_DRAGON_SPAWN_EGG.get());
+                    })
+                    .build());
+}
