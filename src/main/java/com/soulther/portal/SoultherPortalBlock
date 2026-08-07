@@ -1,0 +1,72 @@
+package com.soulther.portal;
+
+import com.soulther.init.ModDimensions;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PortalShape;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.portal.PortalInfo;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.util.ITeleporter;
+
+import javax.annotation.Nullable;
+
+/**
+ * Soulther boyutuna açılan portal bloğu.
+ * Nether portalıyla aynı mantıkta çalışır ama Overworld <-> Soulther arasında taşır
+ * ve Warden Kalbi çerçevesiyle (WardenHeartBlock) açılabilir.
+ */
+public class SoultherPortalBlock extends Block {
+
+    public SoultherPortalBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(100) == 0) {
+            level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS, 0.5F,
+                    random.nextFloat() * 0.4F + 0.8F, false);
+        }
+        for (int i = 0; i < 4; ++i) {
+            double x = pos.getX() + random.nextDouble();
+            double y = pos.getY() + random.nextDouble();
+            double z = pos.getZ() + random.nextDouble();
+            level.addParticle(ParticleTypes.SOUL, x, y, z, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (entity.canChangeDimensions() && !entity.isPassenger() && !entity.isVehicle()
+                && entity.isOnPortalCooldown() == false) {
+            entity.setAsInsidePortal(this, pos);
+        }
+    }
+
+    /** Verilen dünyada, gerçek geçişi (dimension değiştirme) tetikler. */
+    public static void teleportTo(Entity entity, ServerLevel destination, BlockPos entryPos) {
+        entity.changeDimension(destination, new ITeleporter() {
+            @Override
+            public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld,
+                                       float yaw, java.util.function.Function<Boolean, Entity> repositionEntity) {
+                Entity repositioned = repositionEntity.apply(false);
+                if (repositioned != null) {
+                    repositioned.moveTo(entryPos.getX(), entryPos.getY() + 1, entryPos.getZ(), yaw, repositioned.getXRot());
+                }
+                return repositioned;
+            }
+        });
+    }
+}
