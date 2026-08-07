@@ -1,0 +1,90 @@
+package com.soulther.portal;
+
+import com.soulther.init.ModBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Warden Kalbi Bloklarından oluşan dikdörtgen bir çerçeveyi tespit eder.
+ * Basitleştirilmiş bir algoritma kullanır: verilen konumdan başlayarak X ekseni
+ * boyunca ve Z ekseni boyunca olası çerçeveleri arar (nether portalına benzer,
+ * min 2x3 - max 21x21 iç boşluk).
+ */
+public class SoultherPortalShape {
+
+    private static final int MIN_SIZE = 2;
+    private static final int MAX_SIZE = 21;
+
+    private final Level level;
+    private final List<BlockPos> interior = new ArrayList<>();
+    private final Direction.Axis axis;
+
+    private SoultherPortalShape(Level level, List<BlockPos> interior, Direction.Axis axis) {
+        this.level = level;
+        this.interior.addAll(interior);
+        this.axis = axis;
+    }
+
+    public static Optional<SoultherPortalShape> findPortalShape(Level level, BlockPos origin) {
+        Optional<SoultherPortalShape> xShape = tryAxis(level, origin, Direction.Axis.X);
+        if (xShape.isPresent()) return xShape;
+        return tryAxis(level, origin, Direction.Axis.Z);
+    }
+
+    private static Optional<SoultherPortalShape> tryAxis(Level level, BlockPos origin, Direction.Axis axis) {
+        Direction widthDir = axis == Direction.Axis.X ? Direction.EAST : Direction.SOUTH;
+
+        for (int width = MIN_SIZE; width <= MAX_SIZE; width++) {
+            for (int height = MIN_SIZE; height <= MAX_SIZE; height++) {
+                BlockPos base = findBottomLeftCorner(level, origin, widthDir, width, height);
+                if (base == null) continue;
+
+                List<BlockPos> interior = new ArrayList<>();
+                boolean valid = true;
+
+                for (int w = 0; w < width && valid; w++) {
+                    for (int h = 0; h < height && valid; h++) {
+                        BlockPos framePos = base.relative(widthDir, w).above(h);
+                        boolean edge = w == 0 || w == width - 1 || h == 0 || h == height - 1;
+                        BlockState state = level.getBlockState(framePos);
+                        if (edge) {
+                            if (!state.is(ModBlocks.WARDEN_HEART_BLOCK.get())) {
+                                valid = false;
+                            }
+                        } else {
+                            if (!state.isAir() && !state.is(ModBlocks.SOULTHER_PORTAL.get())) {
+                                valid = false;
+                            } else {
+                                interior.add(framePos);
+                            }
+                        }
+                    }
+                }
+
+                if (valid && !interior.isEmpty()) {
+                    return Optional.of(new SoultherPortalShape(level, interior, axis));
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    private static BlockPos findBottomLeftCorner(Level level, BlockPos near, Direction widthDir, int width, int height) {
+        // Basitleştirme: tıklanan pozisyonu doğrudan alt-sol köşe adayı olarak dener.
+        // Gerçek kullanımda oyuncu çerçevenin bir köşesine yakın tıklamalıdır.
+        return near.below();
+    }
+
+    /** Çerçevenin içini Soulther Portal bloklarıyla doldurur. */
+    public void createPortalBlocks() {
+        for (BlockPos pos : interior) {
+            level.setBlockAndUpdate(pos, ModBlocks.SOULTHER_PORTAL.get().defaultBlockState());
+        }
+    }
+}
