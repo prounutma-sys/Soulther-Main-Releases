@@ -1,0 +1,34 @@
+{
+  "itemGroup.soulther": "Soulther",
+
+  "block.soulther.soulther_stone": "Soulther Taşı",
+  "block.soulther.soulther_grass": "Soulther Çimleri",
+  "block.soulther.soulther_ore": "Soulther Cevheri",
+  "block.soulther.soulther_block": "Soulther Bloğu",
+  "block.soulther.soulther_log": "Soulther Kütüğü",
+  "block.soulther.soulther_leaves": "Soulther Yaprakları",
+  "block.soulther.warden_heart_block": "Warden Kalbi Bloğu",
+  "block.soulther.soulther_portal": "Soulther Portalı",
+  "block.soulther.liquid_soul": "Ruh Sıvısı",
+
+  "item.soulther.raw_soulther": "Ham Soulthium",
+  "item.soulther.soulther_ingot": "Soulthium Külçesi",
+  "item.soulther.warden_heart": "Warden Kalbi",
+  "item.soulther.liquid_soul_bucket": "Ruh Sıvısı Kovası",
+  "item.soulther.soulther_sword": "Soulther Kılıcı",
+  "item.soulther.soulther_pickaxe": "Soulther Kazması",
+  "item.soulther.soulther_axe": "Soulther Baltası",
+  "item.soulther.soulther_shovel": "Soulther Kürek",
+  "item.soulther.soulther_hoe": "Soulther Çapası",
+  "item.soulther.soulther_helmet": "Soulther Miğferi",
+  "item.soulther.soulther_chestplate": "Soulther Göğüs Zırhı",
+  "item.soulther.soulther_leggings": "Soulther Pantolonu",
+  "item.soulther.soulther_boots": "Soulther Botları",
+  "item.soulther.soul_wraith_spawn_egg": "Soul Wraith Çağırma Yumurtası",
+  "item.soulther.voidling_spawn_egg": "Voidling Çağırma Yumurtası",
+  "item.soulther.soulther_dragon_spawn_egg": "Soulther Ejderhası Çağırma Yumurtası",
+
+  "entity.soulther.soul_wraith": "Soul Wraith",
+  "entity.soulther.voidling": "Voidling",
+  "entity.soulther.soulther_dragon": "Soulther Ejderhası"
+}
