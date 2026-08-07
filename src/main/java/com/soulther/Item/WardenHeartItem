@@ -1,0 +1,54 @@
+package com.soulther.item;
+
+import com.soulther.init.ModBlocks;
+import com.soulther.portal.SoultherPortalShape;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nonnull;
+import java.util.Optional;
+
+/**
+ * Warden'ın öldürüldüğünde düşürdüğü "Warden Kalbi".
+ * Warden Kalbi Bloklarından (WARDEN_HEART_BLOCK) yapılmış dikdörtgen bir çerçeveye
+ * bu eşyayla sağ tıklandığında Soulther Portalı açılır (tıpkı çakmakla nether portalı
+ * açmak gibi).
+ */
+public class WardenHeartItem extends Item {
+
+    public WardenHeartItem(Properties properties) {
+        super(properties);
+    }
+
+    @Nonnull
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        BlockPos clickedPos = context.getClickedPos();
+        BlockState clickedState = level.getBlockState(clickedPos);
+
+        if (clickedState.is(ModBlocks.WARDEN_HEART_BLOCK.get())) {
+            Optional<SoultherPortalShape> shape = SoultherPortalShape.findPortalShape(level, clickedPos);
+            if (shape.isPresent()) {
+                if (!level.isClientSide) {
+                    shape.get().createPortalBlocks();
+                    level.playSound(null, clickedPos, SoundEvents.RESPAWN_ANCHOR_CHARGE,
+                            SoundSource.BLOCKS, 1.0F, 1.0F);
+                    if (context.getPlayer() != null && !context.getPlayer().getAbilities().instabuild) {
+                        context.getItemInHand().shrink(1);
+                    }
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
+        return InteractionResult.PASS;
+    }
+}
