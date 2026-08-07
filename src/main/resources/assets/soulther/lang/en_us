@@ -1,0 +1,34 @@
+{
+  "itemGroup.soulther": "Soulther",
+
+  "block.soulther.soulther_stone": "Soulther Stone",
+  "block.soulther.soulther_grass": "Soulther Grass",
+  "block.soulther.soulther_ore": "Soulther Ore",
+  "block.soulther.soulther_block": "Block of Soulther",
+  "block.soulther.soulther_log": "Soulther Log",
+  "block.soulther.soulther_leaves": "Soulther Leaves",
+  "block.soulther.warden_heart_block": "Warden Heart Block",
+  "block.soulther.soulther_portal": "Soulther Portal",
+  "block.soulther.liquid_soul": "Liquid Soul",
+
+  "item.soulther.raw_soulther": "Raw Soulther",
+  "item.soulther.soulther_ingot": "Soulther Ingot",
+  "item.soulther.warden_heart": "Warden Heart",
+  "item.soulther.liquid_soul_bucket": "Bucket of Liquid Soul",
+  "item.soulther.soulther_sword": "Soulther Sword",
+  "item.soulther.soulther_pickaxe": "Soulther Pickaxe",
+  "item.soulther.soulther_axe": "Soulther Axe",
+  "item.soulther.soulther_shovel": "Soulther Shovel",
+  "item.soulther.soulther_hoe": "Soulther Hoe",
+  "item.soulther.soulther_helmet": "Soulther Helmet",
+  "item.soulther.soulther_chestplate": "Soulther Chestplate",
+  "item.soulther.soulther_leggings": "Soulther Leggings",
+  "item.soulther.soulther_boots": "Soulther Boots",
+  "item.soulther.soul_wraith_spawn_egg": "Soul Wraith Spawn Egg",
+  "item.soulther.voidling_spawn_egg": "Voidling Spawn Egg",
+  "item.soulther.soulther_dragon_spawn_egg": "Soulther Dragon Spawn Egg",
+
+  "entity.soulther.soul_wraith": "Soul Wraith",
+  "entity.soulther.voidling": "Voidling",
+  "entity.soulther.soulther_dragon": "Soulther Dragon"
+}
