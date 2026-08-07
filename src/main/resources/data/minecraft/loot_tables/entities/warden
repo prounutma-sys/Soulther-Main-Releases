@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:sculk_catalyst" }
+      ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        { "type": "minecraft:item", "name": "soulther:warden_heart" }
+      ]
+    }
+  ]
+}
