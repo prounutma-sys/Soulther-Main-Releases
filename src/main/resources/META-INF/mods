@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${MIT_license}"
+issueTrackerURL="https://github.com/prounutma-sys/Soulther-Main-Releases"
+
+[[mods]]
+modId="${mod_id}"
+version="${1.20.1}"
+displayName="${Soulther}"
+authors="${defender11_TRyan's team}"
+description='''${mod_description}'''
+
+[[dependencies.soulther]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.soulther]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
