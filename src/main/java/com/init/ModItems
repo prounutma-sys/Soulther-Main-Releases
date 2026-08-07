@@ -1,0 +1,79 @@
+package com.soulther.init;
+
+import com.soulther.SoultherMod;
+import com.soulther.item.SoultherArmorMaterial;
+import com.soulther.item.SoultherTier;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+public class ModItems {
+
+    public static final DeferredRegister<Item> ITEMS =
+            DeferredRegister.create(ForgeRegistries.ITEMS, SoultherMod.MOD_ID);
+
+    private static final Item.Properties BASE = new Item.Properties();
+
+    // ---- Bloklar için itemler ----
+    public static final RegistryObject<Item> SOULTHER_STONE = ITEMS.register("soulther_stone",
+            () -> new BlockItem(ModBlocks.SOULTHER_STONE.get(), BASE));
+    public static final RegistryObject<Item> SOULTHER_GRASS = ITEMS.register("soulther_grass",
+            () -> new BlockItem(ModBlocks.SOULTHER_GRASS.get(), BASE));
+    public static final RegistryObject<Item> SOULTHER_ORE = ITEMS.register("soulther_ore",
+            () -> new BlockItem(ModBlocks.SOULTHER_ORE.get(), BASE));
+    public static final RegistryObject<Item> SOULTHER_BLOCK = ITEMS.register("soulther_block",
+            () -> new BlockItem(ModBlocks.SOULTHER_BLOCK.get(), BASE));
+    public static final RegistryObject<Item> SOULTHER_LOG = ITEMS.register("soulther_log",
+            () -> new BlockItem(ModBlocks.SOULTHER_LOG.get(), BASE));
+    public static final RegistryObject<Item> SOULTHER_LEAVES = ITEMS.register("soulther_leaves",
+            () -> new BlockItem(ModBlocks.SOULTHER_LEAVES.get(), BASE));
+    public static final RegistryObject<Item> WARDEN_HEART_BLOCK = ITEMS.register("warden_heart_block",
+            () -> new BlockItem(ModBlocks.WARDEN_HEART_BLOCK.get(), BASE));
+
+    // ---- Ham malzeme / ingot ----
+    public static final RegistryObject<Item> RAW_SOULTHER = ITEMS.register("raw_soulther",
+            () -> new Item(BASE));
+    public static final RegistryObject<Item> SOULTHER_INGOT = ITEMS.register("soulther_ingot",
+            () -> new Item(BASE));
+
+    // ---- Warden'dan gelen özel eşya: portali açmak için kullanılır ----
+    public static final RegistryObject<Item> WARDEN_HEART = ITEMS.register("warden_heart",
+            () -> new com.soulther.item.WardenHeartItem(new Item.Properties().stacksTo(1).fireResistant()));
+
+    // ---- Kova ----
+    public static final RegistryObject<Item> LIQUID_SOUL_BUCKET = ITEMS.register("liquid_soul_bucket",
+            () -> new BucketItem(() -> (net.minecraft.world.level.material.FlowingFluid) ModFluids.LIQUID_SOUL_SOURCE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    // ---- Aletler ----
+    public static final RegistryObject<Item> SOULTHER_SWORD = ITEMS.register("soulther_sword",
+            () -> new SwordItem(SoultherTier.SOULTHER_TIER, 4, -2.2F, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_PICKAXE = ITEMS.register("soulther_pickaxe",
+            () -> new PickaxeItem(SoultherTier.SOULTHER_TIER, 2, -2.6F, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_AXE = ITEMS.register("soulther_axe",
+            () -> new AxeItem(SoultherTier.SOULTHER_TIER, 7.0F, -3.1F, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_SHOVEL = ITEMS.register("soulther_shovel",
+            () -> new ShovelItem(SoultherTier.SOULTHER_TIER, 2.5F, -3.0F, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_HOE = ITEMS.register("soulther_hoe",
+            () -> new HoeItem(SoultherTier.SOULTHER_TIER, -3, 1.0F, new Item.Properties()));
+
+    // ---- Zırh ----
+    public static final RegistryObject<Item> SOULTHER_HELMET = ITEMS.register("soulther_helmet",
+            () -> new ArmorItem(SoultherArmorMaterial.SOULTHER, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_CHESTPLATE = ITEMS.register("soulther_chestplate",
+            () -> new ArmorItem(SoultherArmorMaterial.SOULTHER, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_LEGGINGS = ITEMS.register("soulther_leggings",
+            () -> new ArmorItem(SoultherArmorMaterial.SOULTHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> SOULTHER_BOOTS = ITEMS.register("soulther_boots",
+            () -> new ArmorItem(SoultherArmorMaterial.SOULTHER, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    // ---- Yumurta / anımsatıcılar ----
+    public static final RegistryObject<Item> SOUL_WRAITH_SPAWN_EGG = ITEMS.register("soul_wraith_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.SOUL_WRAITH.get(), 0x3A0B4A, 0x8A5CF6, BASE));
+    public static final RegistryObject<Item> VOIDLING_SPAWN_EGG = ITEMS.register("voidling_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.VOIDLING.get(), 0x150022, 0x5A2A83, BASE));
+    public static final RegistryObject<Item> SOULTHER_DRAGON_SPAWN_EGG = ITEMS.register("soulther_dragon_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.SOULTHER_DRAGON.get(), 0x0A0014, 0xB03AF6, BASE));
+}
